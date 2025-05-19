@@ -1,0 +1,233 @@
+access_url: https://cda.cfa.harvard.edu/cxctap/
+
+
+# `TAP_SCHEMA.schemas`
+## Description: List of schemas
+## Columns:
+`schema_name` | Fully qualified schema name | VARCHAR
+`description` | Brief description of schema | VARCHAR
+`utype` | UTYPE if schema corresponds to a data model | VARCHAR
+`id` | For internal purposes | INTEGER
+
+
+# `TAP_SCHEMA.tables`
+## Description: List of tables
+## Columns:
+`schema_name` | Fully qualified schema name | VARCHAR
+`table_name` | Fully qualified table name | VARCHAR
+`table_type` | One of: table or view | VARCHAR
+`description` | Brief description of table | VARCHAR
+`utype` | UTYPE if table corresponds to a data model | VARCHAR
+`id` | For internal purposes | INTEGER
+
+
+# `TAP_SCHEMA.columns`
+## Description: List of columns
+## Columns:
+`table_name` | Fully qualified table name | VARCHAR
+`column_name` | Column name | VARCHAR
+`description` | Brief description of column | VARCHAR
+`unit` | Unit in VO std format | VARCHAR
+`ucd` | UCD of column if any | VARCHAR
+`utype` | Utype | VARCHAR
+`datatype` | ADQL datatype as in section 2.5 | VARCHAR
+`"size"` | Length of variable length datatypes | INTEGER
+`principal` | A principal column (1 true, 0 false) | INTEGER
+`indexed` | An indexed column (1 true, 0 false) | INTEGER
+`std` | A std column (1 true, 0 false) | INTEGER
+`id` | For internal purposes | INTEGER
+`xtype` | Extended ADQL data type | VARCHAR
+
+
+# `TAP_SCHEMA.keys`
+## Description: List of keys
+## Columns:
+`key_id` | Unique key descriptor | VARCHAR
+`from_table` | Fully qualified table name | VARCHAR
+`target_table` | Fully qualified table name | VARCHAR
+`description` | Description of this key | VARCHAR
+`utype` | Utype of this key | VARCHAR
+`id` | For internal purposes | INTEGER
+
+
+# `TAP_SCHEMA.key_columns`
+## Description: List of key columns
+## Columns:
+`key_id` | Key identifier from keys table | VARCHAR
+`from_column` | Key column name in the from_table | VARCHAR
+`target_column` | Key column name in the target_table | VARCHAR
+`id` | For internal purposes | INTEGER
+
+
+# `ivoa.ObsCore`
+## Description: ObsCore 1.1
+## Columns:
+`dataproduct_type` | Logical data product type | VARCHAR
+`calib_level` | Calibration level | INTEGER
+`obs_collection` | Name of the data collection | VARCHAR
+`obs_id` | Observation ID | VARCHAR
+`obs_publisher_did` | Dataset identifier given by the publisher | VARCHAR
+`access_url` | URL used to access (download) dataset | CLOB
+`access_format` | File content format | VARCHAR
+`access_estsize` | Estimated size of dataset in kB | kbyte | INTEGER
+`target_name` | Astronomical object observed, if any | VARCHAR
+`s_ra` | Central right ascension, ICRS | deg | DOUBLE
+`s_dec` | Central declination, ICRS | deg | DOUBLE
+`s_fov` | Diameter (bounds) of the covered region | deg | DOUBLE
+`s_region` | Region covered as specified in STC or ADQL | REGION
+`s_resolution` | Spatial resolution of data as FWHM | arcsec | DOUBLE
+`t_min` | Start time in MJD | d | DOUBLE
+`t_max` | Stop time in MJD | d | DOUBLE
+`t_exptime` | Total exposure time | s | DOUBLE
+`t_resolution` | Temporal resolution FWHM | s | DOUBLE
+`em_min` | Start in spectral coordinates | m | DOUBLE
+`em_max` | Stop in spectral coordinates | m | DOUBLE
+`em_res_power` | Spectral resolving power | DOUBLE
+`o_ucd` | UCD of observable (e.g. phot.flux.density) | VARCHAR
+`pol_states` | List of polarization states or NULL if not applicable | VARCHAR
+`facility_name` | Name of the instrument used for this observation | VARCHAR
+`instrument_name` | Instrument name | VARCHAR
+`dataproduct_subtype` | Data product specific type | VARCHAR
+`target_class` | Class of the target object as in SSA | VARCHAR
+`obs_creation_date` | Date when the dataset was created | TIMESTAMP
+`obs_creator_name` | Name of the creator of the data | VARCHAR
+`obs_creator_did` | IVOA dataset identifier given by the creator | VARCHAR
+`obs_title` | Brief description of dataset in free format | VARCHAR
+`publisher_id` | IVOA-ID for the Publisher | VARCHAR
+`data_rights` | Data rights | VARCHAR
+`obs_release_date` | Observation release date (ISO 8601) | TIMESTAMP
+`s_resolution_min` | Resolution min value on spectral axis (FHWM of PSF) | arcsec | DOUBLE
+`s_resolution_max` | Resolution max value on spectral axis | arcsec | DOUBLE
+`s_calib_status` | Type of calibration along the spatial axis | VARCHAR
+`s_stat_error` | Astrometric precision along the spatial axis | arcsec | DOUBLE
+`t_calib_status` | Type of time coord calibration | VARCHAR
+`t_stat_error` | Time coord statistical error | s | DOUBLE
+`em_ucd` | Nature of the spectral axis | VARCHAR
+`em_unit` | Units along the spectral axis | VARCHAR
+`em_res_power_min` | Resolving power min value on spectral axis | DOUBLE
+`em_res_power_max` | Resolving power max value on spectral axis | DOUBLE
+`em_calib_status` | Type of spectral coord calibration | VARCHAR
+`o_unit` | Units used for the observable values | VARCHAR
+`o_calib_status` | Level of calibration for the observable coord | VARCHAR
+`o_stat_error_type` | Error | VARCHAR
+`proposal_id` | Identifier of proposal to which observation belongs | VARCHAR
+`s_xel1` | Number of elements along the first spatial axis | INTEGER
+`s_xel2` | Number of elements along the second spatial axis | INTEGER
+`t_xel` | Number of elements along the time axis | INTEGER
+`em_xel` | Number of elements along the spectral axis | INTEGER
+`pol_xel` | Number of polarization samples | INTEGER
+
+
+# `ivoa.obsplan`
+## Description: Observation Locator 0.4
+## Columns:
+`t_planning` | Planning time in MJD | d | DOUBLE
+`target_name` | Astronomical object observed, if any | VARCHAR
+`obs_id` | Observation ID | VARCHAR
+`obs_collection` | Name of the data collection | VARCHAR
+`s_ra` | Central right ascension, ICRS | deg | DOUBLE
+`s_dec` | Central declination, ICRS | deg | DOUBLE
+`s_fov` | Diameter (bounds) of the covered region | deg | DOUBLE
+`s_resolution` | Spatial resolution of data as FWHM | arcsec | DOUBLE
+`t_min` | Start time in MJD | d | DOUBLE
+`t_max` | Stop time in MJD | d | DOUBLE
+`t_exptime` | Total exposure time | s | DOUBLE
+`t_resolution` | Temporal resolution FWHM | s | DOUBLE
+`em_min` | Start in spectral coordinates | m | DOUBLE
+`em_max` | Stop in spectral coordinates | m | DOUBLE
+`em_res_power` | Spectral resolving power | DOUBLE
+`o_ucd` | UCD of observable (e.g., phot.flux.density, phot.count, etc.) | VARCHAR
+`pol_states` | List of polarization states or NULL if not applicable | VARCHAR
+`pol_xel` | Number of polarization samples | INTEGER
+`facility_name` | Name of the facility used for this observation | VARCHAR
+`instrument_name` | Name of the instrument used for this observation | VARCHAR
+`obs_release_date` | Observation release date (ISO 8601) | TIMESTAMP
+`t_plan_exptime` | Planned or scheduled exposure time | s | DOUBLE
+`category` | Observation category. One of the following values: Fixed, Coordinated, Window, Other | VARCHAR
+`priority` | Priority level {0, 1, 2} | INTEGER
+`execution_status` | One of the following values: Planned, Scheduled, Unscheduled, Performed, Aborted | VARCHAR
+`s_region` | Sky region covered by the data product (expressed in ICRS frame) | VARCHAR
+`tracking_type` | One of the following values: Sidereal, Solar-system-object-tracking, Fixed-az-el-transit | VARCHAR
+
+
+# `cxc.proposal`
+## Description: Chandra proposal
+## Columns:
+`number` | Chandra proposal number | VARCHAR
+`title` | Title | VARCHAR
+`category` | Subject category, e.g. Clusters of Galaxies, Stars and WD, Solar System | VARCHAR
+`"PI"` | Principal investigator | VARCHAR
+`type` | Time allocation type: General Observer (GO), Guaranteed Time Observer (GTO), Directors Discretionary Time (DDT), Target of Opportunity (TOO), Calbration (CAL), Chandra Legacy Program (CLP) | VARCHAR
+`abstract` | Abstract | CLOB
+
+
+# `cxc.observation`
+## Description: Chandra observation
+## Columns:
+`obsid` | Chandra observation identifier | INTEGER
+`target_name` | Target name | VARCHAR
+`ra` | Right ascension, ICRS(J2000) | deg | DOUBLE
+`dec` | Declination, ICRS(J2000) | deg | DOUBLE
+`gal_l` | Galactic longitude | deg | DOUBLE
+`gal_b` | Galactic latitude | deg | DOUBLE
+`instrument` | Instrument: ACIS, ACIS-I, ACIS-S, HRC, HRC-I, HRC-S | VARCHAR
+`grating` | Grating: LETG, HETG, None | VARCHAR
+`proposal_number` | Chandra proposal number | VARCHAR
+`status` | Observation status: unobserved, scheduled, observed, archived | VARCHAR
+`start_date` | Start date of the observation (UTC) | TIMESTAMP
+`public_avail_date` | Date of public availability of the data | TIMESTAMP
+`exposure_time` | Total exposure time | ks | DOUBLE
+`exposure_mode` | Exposure mode: ACIS Timed Exposure (TE), ACIS Continuous Clocking (CC), HRC Timing | VARCHAR
+`event_count` | Total event count | INTEGER
+`event_count_rate` | Event count per second | Hz | DOUBLE
+`sequence_num` | Sequence number, relates with other observations | VARCHAR
+`grid_name` | Grid name, relates with other observations in same grid | VARCHAR
+`joint_obs` | Joint observation, relates with coordinated observations in other observatories | VARCHAR
+
+
+# `cxc.image`
+## Description: SIAP images view
+## Columns:
+`name` | Image title | VARCHAR
+`ra` | Source position, ICRS right ascension | deg | DOUBLE
+`dec` | Source position, ICRS declination | deg | DOUBLE
+`accref` | Access reference | VARCHAR
+`naxes` | Number of image axes | INTEGER
+`naxis` | Array of length in pixels of each image axis | INTEGER
+`imgfmt` | MIME-type of the object associated with the image access reference | VARCHAR
+`date_obs` | Epoch at midpoint of observation | d | DOUBLE
+`imgscale` | Array of image scale for each image axis | deg/pixel | DOUBLE
+`obsid` | Chandra observation identifier | INTEGER
+`instrument` | Instrument | VARCHAR
+`exptime` | Exposure time | ks | DOUBLE
+`bandpass` | Bandpass | VARCHAR
+`bandpass_unit` | Bandpass unit | VARCHAR
+`bandlo` | Low limit of the bandpass | keV | DOUBLE
+`bandhi` | High limit of the bandpass | keV | DOUBLE
+`filesize` | Filesize | byte | INTEGER
+`pixflags` | Flags specifying processing of image (C:copy without change) | VARCHAR
+`institute` | Institute | VARCHAR
+
+
+# `cxc.cone`
+## Description: Chandra cone view
+## Columns:
+`obsid` | Chandra observation identifier | VARCHAR
+`target_name` | Target name | VARCHAR
+`ra` | Right ascension, ICRS(J2000) | deg | DOUBLE
+`dec` | Declination, ICRS(J2000) | deg | DOUBLE
+`gal_l` | Galactic longitude | deg | DOUBLE
+`gal_b` | Galactic latitude | deg | DOUBLE
+`instrument` | Instrument: ACIS, ACIS-I, ACIS-S, HRC, HRC-I, HRC-S | VARCHAR
+`grating` | Grating: LETG, HETG, None | VARCHAR
+`proposal_number` | Chandra proposal number | VARCHAR
+`status` | Observation status: unobserved, scheduled, observed, archived | VARCHAR
+`start_date` | Start date of the observation (UTC) | TIMESTAMP
+`public_avail_date` | Date of public availability of the data | TIMESTAMP
+`exposure_time` | Total exposure time | ks | DOUBLE
+`exposure_mode` | Exposure mode: ACIS Timed Exposure (TE), ACIS Continuous Clocking (CC), HRC Timing | VARCHAR
+`event_count` | Total event count | INTEGER
+`event_count_rate` | Event count per second | Hz | DOUBLE
+`sequence_num` | Sequence number, relates with other observations | VARCHAR
+`grid_name` | Grid name, relates with other observations in same grid | VARCHAR
+`joint_obs` | Joint observation, relates with coordinated observations in other observatories | VARCHAR
