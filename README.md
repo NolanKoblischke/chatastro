@@ -47,7 +47,7 @@ The `schema.txt` file is uploaded directly into the "Knowledge" section of the C
 When a user asks a question, ChatGPT **automatically performs Retrieval Augmented Generation (RAG)**. It searches the content of `schema.txt` to find relevant table and column names, their descriptions, and other metadata to construct accurate ADQL queries.
 
 ### Final Thoughts
-Once a custom GPT is created, you can share it publicaly, even to those who do not have ChatGPT Plus. 
+Once a custom GPT is created, you can share it publicly, even to those who do not have ChatGPT Plus. 
 
 The user interacts with the GPT by: asking for data, copying the generated query URL, pasting it in the browser, then they can upload the downloaded data and ask for plotting or analysis.
 
