@@ -2,8 +2,8 @@ import pyvo
 import logging
 from typing import Tuple, Iterable
 import os
-# TOKEN = os.environ["ASTRO_DATABASE_TOKEN"] if "ASTRO_DATABASE_TOKEN" in os.environ else None
-TOKEN = None
+TOKEN = os.environ["ASTRO_DATABASE_TOKEN"] if "ASTRO_DATABASE_TOKEN" in os.environ else None
+# TOKEN = None
 # Configure basic logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 

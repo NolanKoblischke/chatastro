@@ -1,15 +1,39 @@
-# July 23 Update
+# July 23 MCP + Claude Code Work in Progress
 
-Testing out MCP with Claude Code.
+Testing out MCP with [Claude Code](https://www.anthropic.com/claude-code). Also, I use uv. To install uv use:
+
+```
+pip install uv
+```
 
 In one terminal, run:
-`uv run tap_mcp_server.py stdio`
 
-In the other terminal, use Claude Code, provide it the MCP and ask it about a dataservice.
+```
+uv run tap_mcp_server.py stdio
+```
+
+In the other terminal, run:
+
+```
+claude mcp add tap-schema-server -- uv run tap_mcp_server.py
+```
+
+Then use Claude Code, provide it a TAP URL, and ask it about the TAP database.
 
 Since I'm currently testing on LSST DP1. You should have your LSST token as an `ASTRO_DATABASE_TOKEN` env var.
 
-# ChatAstro - Chatting with TAP servers
+Example prompt for Claude:
+```
+Make a CMD and color-color plot for Abell 360  covered by DP1 at RA=37.865deg, DEC=6.982deg, range_deg = 0.1.
+
+Use the MCP tool and https://data.lsst.cloud/api/tap to figure out the column names and tables you need.
+
+When you actually get to querying LSST, use PyVO with url.replace("https://", f"https://x-oauth-basic:{os.environ["ASTRO_DATABASE_TOKEN"]}@").
+```
+---
+
+# For Custom GPTs
+## ChatAstro - Chatting with TAP servers
 
 At the moment, this repo contains work in progress towards a chatbot for every TAP server.
 
