@@ -1,7 +1,9 @@
 import pyvo
 import logging
 from typing import Tuple, Iterable
-
+import os
+# TOKEN = os.environ["ASTRO_DATABASE_TOKEN"] if "ASTRO_DATABASE_TOKEN" in os.environ else None
+TOKEN = None
 # Configure basic logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -20,6 +22,9 @@ def list_tables_iterable(url: str) -> Iterable[Tuple[str, str]]:
         
     try:
         logging.info(f"Attempting to load tables from TAP server: {url}")
+        if TOKEN:
+            #Replace https:// with https://x-oauth-basic:TOKEN@
+            url = url.replace("https://", f"https://x-oauth-basic:{TOKEN}@")
         tap_service = pyvo.dal.TAPService(url)
         tables = tap_service.tables
           
@@ -55,6 +60,8 @@ def list_columns_iterable(table: str, url: str) -> Iterable[str]:
         
     try:
         logging.info(f"Attempting to load column metadata for table: {table} at {url}")
+        if TOKEN:
+            url = url.replace("https://", f"https://x-oauth-basic:{TOKEN}@")
         tap_service = pyvo.dal.TAPService(url)
         
         table_metadata = None
@@ -133,33 +140,33 @@ def generate_llm_schema(url: str) -> str:
 
     return "\n".join(schema_parts)
 
-if __name__ == '__main__':
-    tap_url_example = "https://cda.cfa.harvard.edu/cxctap/"
+# if __name__ == '__main__':
+#     # tap_url_example = "https://cda.cfa.harvard.edu/cxctap/"
     
-    print(f"Generating LLM schema for: {tap_url_example}")
-    llm_schema = generate_llm_schema(tap_url_example)
-    print("\n--- LLM Schema Output ---")
-    print(llm_schema)
-    print("--- End of LLM Schema Output ---")
+#     # print(f"Generating LLM schema for: {tap_url_example}")
+#     # llm_schema = generate_llm_schema(tap_url_example)
+#     # print("\n--- LLM Schema Output ---")
+#     # print(llm_schema)
+#     # print("--- End of LLM Schema Output ---")
 
-    output_filename = "cxc_llm_schema.txt"
-    try:
-        with open(output_filename, "w", encoding="utf-8") as f:
-            f.write(llm_schema)
-        print(f"\nSchema successfully saved to {output_filename}")
-    except IOError as e:
-        print(f"\nError writing schema to file {output_filename}: {e}")
+#     # output_filename = "cxc_llm_schema.txt"
+#     # try:
+#     #     with open(output_filename, "w", encoding="utf-8") as f:
+#     #         f.write(llm_schema)
+#     #     print(f"\nSchema successfully saved to {output_filename}")
+#     # except IOError as e:
+#     #     print(f"\nError writing schema to file {output_filename}: {e}")
 
-    gaia_tap_url = "https://gea.esac.esa.int/tap-server/tap"
-    print(f"\nGenerating LLM schema for: {gaia_tap_url}")
-    llm_schema_gaia = generate_llm_schema(gaia_tap_url)
-    print("\n--- LLM Schema Output (Gaia) ---")
-    print(llm_schema_gaia)
-    print("--- End of LLM Schema Output (Gaia) ---")
-    output_filename_gaia = "gaia_llm_schema.txt"
-    try:
-        with open(output_filename_gaia, "w", encoding="utf-8") as f:
-            f.write(llm_schema_gaia)
-        print(f"\nGaia schema successfully saved to {output_filename_gaia}")
-    except IOError as e:
-        print(f"\nError writing Gaia schema to file {output_filename_gaia}: {e}")
+#     gaia_tap_url = "https://gea.esac.esa.int/tap-server/tap"
+#     print(f"\nGenerating LLM schema for: {gaia_tap_url}")
+#     llm_schema_gaia = generate_llm_schema(gaia_tap_url)
+#     print("\n--- LLM Schema Output (Gaia) ---")
+#     print(llm_schema_gaia)
+#     print("--- End of LLM Schema Output (Gaia) ---")
+#     output_filename_gaia = "gaia_llm_schema.txt"
+#     try:
+#         with open(output_filename_gaia, "w", encoding="utf-8") as f:
+#             f.write(llm_schema_gaia)
+#         print(f"\nGaia schema successfully saved to {output_filename_gaia}")
+#     except IOError as e:
+#         print(f"\nError writing Gaia schema to file {output_filename_gaia}: {e}")

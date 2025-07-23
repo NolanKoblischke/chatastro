@@ -1,3 +1,14 @@
+# July 23 Update
+
+Testing out MCP with Claude Code.
+
+In one terminal, run:
+`uv run tap_mcp_server.py stdio`
+
+In the other terminal, use Claude Code, provide it the MCP and ask it about a dataservice.
+
+Since I'm currently testing on LSST DP1. You should have your LSST token as an `ASTRO_DATABASE_TOKEN` env var.
+
 # ChatAstro - Chatting with TAP servers
 
 At the moment, this repo contains work in progress towards a chatbot for every TAP server.
